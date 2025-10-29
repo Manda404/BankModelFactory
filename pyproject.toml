@@ -1,0 +1,84 @@
+# =====================================================================
+# 🏦 BankModelFactory
+# Projet professionnel de Machine Learning pour la prédiction marketing bancaire
+# Architecture modulaire, reproductible et déployable en cloud.
+# =====================================================================
+
+[tool.poetry]
+# --- Métadonnées du package ---
+name = "bankmodelfactory"                     # Nom du package (minuscule et sans espace)
+version = "0.1.0"                             # Version initiale du projet
+description = "End-to-end ML pipeline for predictive marketing in banking"
+authors = ["Manda Surel <s239150.eps@gmail.com>"]
+license = "MIT"
+packages = [{ include = "bankmodelfactory", from = "src" }]   # Indique que le code source est dans src/
+
+# =====================================================================
+# 📦 Dépendances principales (runtime)
+# =====================================================================
+[tool.poetry.dependencies]
+python = ">=3.10,<3.13"                       # Compatibilité Python (stabilité entre 3.10 et 3.12)
+
+# --- Core data science ---
+pandas = "^2.2"                               # Manipulation de données
+numpy = "^2.0"                                # Calculs numériques haute performance
+scikit-learn = "^1.5"                         # Modèles ML de base et preprocessing
+catboost = "^1.2"                             # Modèle performant pour features catégorielles
+
+# --- Suivi et configuration du pipeline ---
+mlflow = "^2.16"                              # Tracking des expériences ML (métriques, modèles)
+hydra-core = "^1.3"                           # Gestion hiérarchique des configurations YAML
+typer = "^0.12"                               # CLI moderne et intuitive pour lancer les scripts
+pyyaml = "^6.0"                               # Lecture/écriture de fichiers YAML
+
+# --- API & déploiement ---
+fastapi = "^0.115"                            # Framework web moderne pour l’API d’inférence
+uvicorn = { extras = ["standard"], version = "^0.30" }  # Serveur ASGI performant pour FastAPI
+python-dotenv = "^1.0"                        # Chargement automatique des variables d’environnement (.env)
+
+# =====================================================================
+# 🧪 Dépendances de développement
+# =====================================================================
+[tool.poetry.group.dev.dependencies]
+# --- Qualité et style ---
+black = "^24.8"                               # Formatteur de code standard
+ruff = "^0.6"                                 # Linter ultra-rapide (remplace flake8/pylint)
+isort = "^5.13"                               # Trie automatique des imports
+mypy = "^1.11"                                # Vérification de typage statique (qualité + robustesse)
+
+# --- Tests et couverture ---
+pytest = "^8.3"                               # Framework de tests unitaires
+pytest-cov = "^5.0"                           # Mesure de la couverture de test
+pre-commit = "^3.8"                           # Vérification automatique avant chaque commit
+
+# --- Gestion de pipeline et versioning de données (optionnel) ---
+dvc = { version = "^3.51", optional = true }  # Data Version Control pour traçabilité des datasets
+
+# =====================================================================
+# ⚙️ Configuration des outils de code quality
+# =====================================================================
+
+[tool.ruff]
+# --- Paramètres du linter Ruff ---
+line-length = 100                             # Longueur max par ligne (style pro)
+select = ["E","F","I","B","UP","SIM","C4"]    # Règles activées : erreurs, import, simplifications...
+
+[tool.black]
+# --- Paramètres du formatteur Black ---
+line-length = 100                             # Aligné avec Ruff pour cohérence
+
+[tool.isort]
+# --- Paramètres du gestionnaire d’imports ---
+profile = "black"                             # S’aligne automatiquement sur le style Black
+
+[tool.mypy]
+# --- Paramètres de typage statique ---
+ignore_missing_imports = true                 # Ignore les libs non typées (numpy, pandas)
+strict = true                                 # Active tous les checks de typage stricts
+
+# =====================================================================
+# 🏗️ Système de build
+# =====================================================================
+[build-system]
+requires = ["poetry-core>=1.8.0"]             # Backend de build de Poetry
+build-backend = "poetry.core.masonry.api"     # Interface standard pour construire le package
