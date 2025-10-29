@@ -2,7 +2,7 @@
 
 # 🏦 BankModelFactory
 
-**End-to-end Machine Learning pipeline for predictive marketing in banking**
+End-to-end Machine Learning pipeline for predictive marketing in banking
 
 ---
 
