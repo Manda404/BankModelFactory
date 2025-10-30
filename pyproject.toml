@@ -26,7 +26,7 @@ scikit-learn = "^1.5"                         # Modèles ML de base et preproces
 catboost = "^1.2"                             # Modèle performant pour features catégorielles
 
 # --- Suivi et configuration du pipeline ---
-mlflow = "^2.16"                              # Tracking des expériences ML (métriques, modèles)
+mlflow = "^3.5.1"                             # Tracking des expériences ML (métriques, modèles)
 hydra-core = "^1.3"                           # Gestion hiérarchique des configurations YAML
 typer = "^0.12"                               # CLI moderne et intuitive pour lancer les scripts
 pyyaml = "^6.0"                               # Lecture/écriture de fichiers YAML
@@ -39,6 +39,7 @@ python-dotenv = "^1.0"                        # Chargement automatique des varia
 # =====================================================================
 # 🧪 Dépendances de développement
 # =====================================================================
+loguru = "^0.7.3"
 [tool.poetry.group.dev.dependencies]
 # --- Qualité et style ---
 black = "^24.8"                               # Formatteur de code standard

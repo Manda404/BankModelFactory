@@ -1,0 +1,20 @@
+# configs/data.yaml
+
+# --- Source ---
+source_url: "https://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zip"
+
+# --- Local paths ---
+local_raw: "/Users/surelmanda/BankModelFactory/data/raw/bank-full.csv"
+local_processed: "data/processed/bank_clean.csv"
+
+# --- File properties ---
+sep: ";"              # CSV separator
+encoding: "utf-8"     # File encoding
+#label: "y"            # Target variable name
+#positive_label: "yes" # Value representing the positive class
+
+# --- Split parameters ---
+test_size: 0.1
+val_size: 0.2
+stratify: true
+random_seed: 42
