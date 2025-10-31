@@ -40,6 +40,7 @@ python-dotenv = "^1.0"                        # Chargement automatique des varia
 # 🧪 Dépendances de développement
 # =====================================================================
 loguru = "^0.7.3"
+torch = "^2.9.0"
 [tool.poetry.group.dev.dependencies]
 # --- Qualité et style ---
 black = "^24.8"                               # Formatteur de code standard
