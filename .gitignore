@@ -47,7 +47,8 @@ temp/
 pytest_cache/
 ruff_cache/
 __pypackages__/
-poetry.lock
+/poetry.lock
+
 
 # Data and outputs
 data/raw/
