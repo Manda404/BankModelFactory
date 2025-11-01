@@ -59,6 +59,7 @@ dvc = { version = "^3.51", optional = true }  # Data Version Control pour traça
 # =====================================================================
 # ⚙️ Configuration des outils de code quality
 # =====================================================================
+tqdm = "^4.67.1"
 
 [tool.ruff]
 # --- Paramètres du linter Ruff ---

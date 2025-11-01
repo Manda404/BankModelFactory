@@ -14,7 +14,7 @@ encoding: "utf-8"     # File encoding
 #positive_label: "yes" # Value representing the positive class
 
 # --- Split parameters ---
-test_size: 0.1
-val_size: 0.2
+test_size: 0.2
+val_size: 0.3
 stratify: true
 random_seed: 42

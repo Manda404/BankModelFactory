@@ -1,0 +1,6 @@
+train:
+  num_epochs: 5
+  visualize: true
+  save_plot: true
+  plot_path: "/Users/surelmanda/BankModelFactory/reports"
+  checkpoint_path: "/Users/surelmanda/BankModelFactory/artifacts/models/"

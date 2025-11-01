@@ -2,11 +2,11 @@
 ===========================================================
 BankModelFactory - Configuration Loader
 -----------------------------------------------------------
-This module centralizes the loading of configuration files
-(YAML) used across the ML pipeline.
+This module centralizes the loading of configuration files (YAML)
+used across the ML pipeline.
 
-It allows you to define all parameters (data, model, training, etc.)
-in separate YAML files under the 'configs/' directory.
+It supports multiple configuration sections (data, model, train)
+and dynamically merges them into a unified Config object.
 
 By separating configuration from code, the project remains:
     - modular
@@ -16,7 +16,7 @@ By separating configuration from code, the project remains:
 """
 
 import yaml
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Dict
 
 
@@ -28,11 +28,16 @@ class Config:
     Attributes
     ----------
     data : Dict[str, Any]
-        Parameters related to data ingestion, preprocessing and paths.
-    (You can later add attributes such as 'features', 'model', 'train', etc.)
+        Parameters related to data ingestion and preprocessing.
+    train : Dict[str, Any]
+        Parameters for training (epochs, learning rate, etc.)
+    model : Dict[str, Any]
+        Model-specific configuration.
     """
 
-    data: Dict[str, Any]
+    data: Dict[str, Any] = field(default_factory=dict)
+    train: Dict[str, Any] = field(default_factory=dict)
+    model: Dict[str, Any] = field(default_factory=dict)
 
     @staticmethod
     def load(paths: Dict[str, str]) -> "Config":
@@ -42,32 +47,30 @@ class Config:
         Parameters
         ----------
         paths : dict
-            Dictionary mapping configuration section names to file paths.
+            Mapping of configuration section names to YAML file paths.
             Example:
                 {
                     "data": "configs/data.yaml",
-                    "model": "configs/model.yaml",
-                    "train": "configs/train.yaml"
+                    "train": "configs/train.yaml",
+                    "model": "configs/model.yaml"
                 }
 
         Returns
         -------
         Config
-            A dataclass instance containing all loaded YAML content.
+            Instance containing all loaded configuration sections.
 
         Example
         -------
-        >>> cfg = Config.load({"data": "configs/data.yaml"})
-        >>> print(cfg.data["local_raw"])
-        'data/raw/bank-additional/bank-additional-full.csv'
+        >>> cfg = Config.load({"train": "configs/train.yaml"})
+        >>> print(cfg.train["num_epochs"])
+        20
         """
-        cfg = {}  # Dictionary to store loaded YAML sections
+        cfg = {}
 
-        # Iterate over each config file provided
         for key, path in paths.items():
             with open(path, "r") as f:
-                # Parse YAML file and store it under its key (e.g., 'data', 'model', etc.)
                 cfg[key] = yaml.safe_load(f)
 
-        # Instantiate the dataclass dynamically
-        return Config(**cfg)
+        # Merge dynamically: only known sections + loaded ones
+        return Config(**{**{k: {} for k in ["data", "train", "model"]}, **cfg})
